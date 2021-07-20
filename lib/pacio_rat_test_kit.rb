@@ -1,10 +1,11 @@
-require_relative 'inferno_template/patient_group'
+#require_relative 'pacio-rat/pacio_rat_patient'
+Dir.glob(File.join(__dir__, 'pacio-rat', '*.rb')).each { |path| require_relative path.delete_prefix("#{__dir__}/") }
 
-module InfernoTemplate
+module PacioRat
   class Suite < Inferno::TestSuite
     id :test_suite_template
-    title 'Inferno Test Suite Template'
-    description 'A basic test suite template for Inferno'
+    title 'PACIO Re-assessment Timepoints'
+    description 'PACIO Re-assessment Timepoints'
 
     # This input will be available to all tests in this suite
     input :url
@@ -34,8 +35,14 @@ module InfernoTemplate
       end
     end
 
+    group do
+      title 'Re-assessment Timepoints Resources'
+
+      group from: :pacio_rat_patient
+    end
+
     # Tests and TestGroups can be written in separate files and then included
     # using their id
-    group from: :patient_group
+    #group from: :patient_group
   end
 end
